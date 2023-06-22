@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="appoint_view_tree" model="ir.ui.view">
+    <field name="name">appoint.view.tree</field>
+    <field name="model">test.appoint</field>
+    <field name="arch" type="xml">
+        <tree string="appoint_tree">
+            <field name="appointment_name"/>
+            <field name="appointment_date"/>
+            <field name="private_appointment"/>
+            <field name="appointment_type"/>
+            <field name="company"/>
+            <field name="email"/>
+            <field name="user"/>
+        </tree>
+    </field>
+</record>
+
+    <record id="appoint_view_form" model="ir.ui.view">
+        <field name="name">appoint.view.form</field>
+        <field name="model">test.appoint</field>
+        <field name="arch" type="xml">
+            <form string="appoint_form">
+                <sheet>
+                    <group>
+                        <field name="appointment_name"/>
+                        <field name="appointment_date"/>
+                        <field name="private_appointment"/>
+                        <field name="appointment_type"/>
+                        <field name="company" attrs="{'invisible': [('appointment_type', '!=', 'company')]}"/>
+                        <field name="email" attrs="{'invisible': [('appointment_type', '!=', 'company')]}"/>
+                        <field name="user"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="appoint_view_action" model="ir.actions.act_window">
+        <field name="name">Appointment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">test.appoint</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="appoint_categ"
+              name="Appointment"
+              action="appoint_view_action"
+              parent="appoint_menu"
+              sequence="10"/>
+
+</odoo>
